@@ -9,8 +9,7 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
-  connectionString:
-    "postgresql://doadmin:n09ekb9k88en0t1q@db-postgresql-lon1-22264-do-user-7432706-0.b.db.ondigitalocean.com:25060/defaultdb",
+  connectionString: process.env.CONNECTION_STRING,
 });
 
 export const query = (qstr: string, params?: Array<string | number>) => {
