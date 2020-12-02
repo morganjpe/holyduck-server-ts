@@ -43,3 +43,16 @@ export const updateProductStock = async (
     res.status(500).send({ error: "there has been an error" });
   }
 };
+
+export const deleteProductById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    await query("DELETE FROM menu_items WHERE id = $1", [id]);
+    res.send({ deleted: id });
+  } catch (error) {
+    res.status(500).send({ error: "there has been an error" });
+  }
+};
