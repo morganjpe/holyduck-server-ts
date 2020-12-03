@@ -5,11 +5,7 @@ interface AuthRequest extends Request {
   user?: string | object;
 }
 
-const jwtAuthorisationMiddleware = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export default (req: AuthRequest, res: Response, next: NextFunction) => {
   const token = req.header("token");
 
   if (!token) return res.status(401).send({ error: "Access Denied" });

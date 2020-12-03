@@ -7,8 +7,12 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import cors from "cors";
 
+// middleware
+import auth from "./middleware/auth";
+
 // routes
-import menuItems from "./routes/menuItems";
+import publicRoutes from "./routes/public";
+import privateRoutes from "./routes/private";
 
 dotenv.config();
 
@@ -30,11 +34,16 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-menuItems(app);
-
 app.get("/", (req: Request, res: Response) => {
   res.send({ holyDuck: "connected" });
 });
+
+publicRoutes(app);
+
+// add auth middleware
+app.use(auth);
+
+privateRoutes(app);
 
 const server = app.listen(PORT, () => {
   console.log(`App currently listening on http://localhost:${PORT}`);
