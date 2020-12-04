@@ -1,4 +1,4 @@
-import { Pool, QueryResult, QueryArrayResult } from "pg";
+import { Pool } from "pg";
 
 const pool = new Pool({
   ssl: {
